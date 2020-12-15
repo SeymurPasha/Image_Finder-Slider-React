@@ -9,21 +9,24 @@ import Slider from './Components/Slider'
 function App() {
 
 const [images, setImages] = useState([])
-const [category, setCategory] = useState('house')
+const [category, setCategory] = useState('bird')
 const [isLoaded, setLoading] = useState(false)
 const [current, setCurrent] = useState(0) 
 const [xValue, setTransform] = useState(0)
+const [displayModal, setDisplayModal] = useState(true)
 
 
 useEffect(() => {
-setTransform(current * (-400))
+setTransform(current * (-800))
+setDisplayModal(!displayModal)
 }, [current])
+
 
 
 useEffect(() => {
 const fetchData = async () => {
 setLoading(true)
-const res = await axios.get(`https://pixabay.com/api/?key=17244600-fbf402d1996aa90a6382bacde&q=${category}&image_type=photo`)
+const res = await axios.get(`https://pixabay.com/api/?key=17244600-fbf402d1996aa90a6382bacde&q=${category}&image_type=photo&per_page=16`)
   setImages(res.data.hits)
   setLoading(false)
 }
@@ -34,13 +37,21 @@ fetchData()
   
 return (
     <div className="App">
-      {isLoaded 
-      ? <h1>Loading ...</h1>
-      : null
-    }
       <Input category = {category} setCategory= {setCategory} />
+      {isLoaded 
+      ?
+      <i 
+      style = {{fontSize:'100px', color:'blue'}}
+      className="fas fa-spinner fa-spin"></i>
+      :
+        <div 
+        className = 'images'
+        style = {{width:'100%', height:'100%'}}
+        >
       <ImageContainer images = {images} setCurrent = {setCurrent} />
-      <Slider images = {images} setTransform = {setTransform} xValue = {xValue}/>
+      <Slider displayModal = {displayModal} images = {images} setTransform = {setTransform} xValue = {xValue} setDisplayModal = {setDisplayModal}/>
+        </div>
+}
     </div>
   );
 }

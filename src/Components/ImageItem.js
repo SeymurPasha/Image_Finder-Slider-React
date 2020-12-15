@@ -7,7 +7,7 @@ export default function ImageItem({src,setCurrent, id}) {
         <img
         onClick = {() =>setCurrent(id)}  
         src = {src}
-        width = {400}
+        width = {350}
         height = {250}
         />
         </div>
