@@ -1,5 +1,32 @@
 import React from 'react'
 import SliderItem from './SliderItem'
+import styled from 'styled-components'
+
+
+const ArrowRight = styled.i`
+position:absolute; 
+top:250px; 
+right:50px; 
+font-size:60px; 
+color:#E8E8E8; 
+cursor: pointer;
+`
+const ArrowLeft = styled.i`
+position:absolute; 
+top:250px; 
+left:50px; 
+font-size:60px; 
+color:#E8E8E8; 
+cursor: pointer;
+`
+
+const Close = styled.i`
+position: absolute; 
+top: 10px; 
+right: 10px; 
+color : #E8E8E8; 
+cursor:pointer;
+`
 
 export default function Slider({images, setTransform,xValue,displayModal, setDisplayModal}) {
 
@@ -31,15 +58,13 @@ const style = {
       {displayModal 
     ? <div style = {style} >
           {images.map(image => <SliderItem xValue = {xValue} key = {image.id} src = {image.largeImageURL} /> )}
-          <i className="fas fa-chevron-left" onClick  = {slideLeft} style = {{position:'absolute', top:'250px', left:'50px', fontSize:'60px', color:'blue', cursor:'pointer'}}></i>
-          <i className="fas fa-chevron-right" onClick  = {slideRight} style = {{position:'absolute', top:'250px', right:'50px', fontSize:'60px', color:'blue', cursor:'pointer'}}></i>
-          <i 
+          <ArrowLeft className="fas fa-chevron-left" onClick  = {slideLeft}></ArrowLeft>
+          <ArrowRight className="fas fa-chevron-right" onClick  = {slideRight}></ArrowRight>
+          <Close 
           className="fas fa-times" 
-          style = {{position:'absolute', top:'10px', right:'10px', color :'blue', cursor:'pointer'}}
           onClick = {() => setDisplayModal(!displayModal)}
           >
-
-          </i>
+          </Close>
         </div>
     : null}
     </React.Fragment>   

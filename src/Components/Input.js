@@ -1,13 +1,32 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const InputComponent = styled.input`
+width:70%;
+height:50px; 
+margin-bottom:10px;
+border-radius:12px;
+outline:none;
+::placeholder {
+    font-family: 'Hammersmith One', sans-serif;
+}
+  border: none;
+  font-size: 18px;
+  background: #dde1e7;
+  color: #595959;
+  border-radius: 25px;
+  box-shadow: inset 2px 2px 5px #BABECC,
+              inset -5px -5px 10px #ffffff73;
+}
+`;
 
 export default function Input({category,setCategory}) {
    
     return (
         <div>
-        <input 
+        <InputComponent
         onChange = {e => setCategory(e.target.value)} 
-        value = {category} 
-        style = {{width:'100%', height:'30px', backgroundColor:'#e6e6ea'}}
+        placeholder = '  Search photos' 
         /> 
         </div>
     )
