@@ -11,10 +11,11 @@ width:100%;
 height:100%;
 `;
 
-export default function ImageContainer({images,setCurrent}) {
+
+export default function ImageContainer({images}) {
     return (
         <ImageContainerComponent>
-        {images.map((image,index) => <ImageItem key = {image.id} id = {index} src = {image.largeImageURL} setCurrent = {setCurrent} /> )}  
+        {images.map((image,index) => <ImageItem key = {image.id} id = {index} src = {image.largeImageURL} /> )}  
         </ImageContainerComponent>
     )
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import {setCategory} from '../redux/category/categoryAction'
+
 
 const InputComponent = styled.input`
 width:70%;
@@ -20,12 +22,12 @@ outline:none;
 }
 `;
 
-export default function Input({category,setCategory}) {
+export default function Input({dispatch}) {
    
     return (
         <div>
         <InputComponent
-        onChange = {e => setCategory(e.target.value)} 
+        onChange = {e => dispatch(setCategory(e.target.value))} 
         placeholder = '  Search photos' 
         /> 
         </div>

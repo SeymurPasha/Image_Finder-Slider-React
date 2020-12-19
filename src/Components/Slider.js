@@ -1,7 +1,9 @@
 import React from 'react'
 import SliderItem from './SliderItem'
 import styled from 'styled-components'
-
+import { useDispatch, useSelector } from 'react-redux';
+import {setCategory} from '../redux/category/categoryAction'
+import { setXvalue } from '../redux/transform/transformAction';
 
 const ArrowRight = styled.i`
 position:absolute; 
@@ -28,19 +30,24 @@ color : #E8E8E8;
 cursor:pointer;
 `
 
-export default function Slider({images, setTransform,xValue,displayModal, setDisplayModal}) {
+export default function Slider({images,displayModal, setDisplayModal}) {
+
+
+  const dispatch = useDispatch()
+  const xValue = useSelector(state => state.xValue.xValue)
 
   const slideLeft = () => {
     if(xValue < 0) {
-    setTransform(prevState => prevState+800)
+    dispatch(setXvalue(prevState => prevState+800))
     }
   }
   const slideRight = () => {
     if(xValue !== (images.length-1) * (-800)) {
-      setTransform(prevState => prevState-800)
+     dispatch(setXvalue(prevState => prevState-800))
     }
    
   }
+
 
 const style = {
         display: 'flex',
@@ -50,7 +57,8 @@ const style = {
         transform: 'translate(-50%, -50%)',
         width:'800px', 
         height:'500px', 
-        overflow:'hidden'
+        overflow:'hidden',
+        zIndex:2
   }
   
   return (
