@@ -2,8 +2,9 @@ import React from 'react'
 import SliderItem from './SliderItem'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux';
-import {setCategory} from '../redux/category/categoryAction'
-import { setXvalue } from '../redux/transform/transformAction';
+import { slideLeft } from '../redux/transform/LeftAction';
+import { slideRight } from '../redux/transform/RightAction';
+import {setModal} from '../redux/modal/modalAction'
 
 const ArrowRight = styled.i`
 position:absolute; 
@@ -30,24 +31,24 @@ color : #E8E8E8;
 cursor:pointer;
 `
 
-export default function Slider({images,displayModal, setDisplayModal}) {
+export default function Slider({images}) {
 
 
   const dispatch = useDispatch()
   const xValue = useSelector(state => state.xValue.xValue)
+  const modal = useSelector(state => state.modal.displayModal)
 
-  const slideLeft = () => {
+  const toLeft = () => {
     if(xValue < 0) {
-    dispatch(setXvalue(prevState => prevState+800))
+    dispatch(slideLeft())
     }
   }
-  const slideRight = () => {
+  const toRight = () => {
     if(xValue !== (images.length-1) * (-800)) {
-     dispatch(setXvalue(prevState => prevState-800))
+      dispatch(slideRight()) 
     }
-   
+    
   }
-
 
 const style = {
         display: 'flex',
@@ -63,14 +64,14 @@ const style = {
   
   return (
     <React.Fragment>
-      {displayModal 
+      {modal 
     ? <div style = {style} >
           {images.map(image => <SliderItem xValue = {xValue} key = {image.id} src = {image.largeImageURL} /> )}
-          <ArrowLeft className="fas fa-chevron-left" onClick  = {slideLeft}></ArrowLeft>
-          <ArrowRight className="fas fa-chevron-right" onClick  = {slideRight}></ArrowRight>
+          <ArrowLeft className="fas fa-chevron-left" onClick  = {() => toLeft()}></ArrowLeft>
+          <ArrowRight className="fas fa-chevron-right" onClick  = {() => toRight()}></ArrowRight>
           <Close 
           className="fas fa-times" 
-          onClick = {() => setDisplayModal(!displayModal)}
+          onClick = {() => dispatch(setModal())}
           >
           </Close>
         </div>

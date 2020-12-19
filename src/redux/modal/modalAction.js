@@ -1,8 +1,7 @@
 import { SET_MODAL } from './modalTypes'
 
-export const setModal = (number = 1) => {
+export const setModal = () => {
   return {
-    type: SET_MODAL,
-    payload: number
+    type: SET_MODAL
   }
 }

@@ -1,1 +1,3 @@
-export const SET_XVALUE = 'SET_XVALUE'
+export const LEFT_ACTION = 'LEFT_ACTION'
+export const RIGHT_ACTION = 'RIGHT_ACTION'
+export const CURRENT_XVALUE = 'CURRENT_XVALUE'

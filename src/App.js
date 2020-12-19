@@ -6,24 +6,24 @@ import ImageContainer from './Components/ImageContainer';
 import Input from './Components/Input'
 import Slider from './Components/Slider'
 import Title from './Components/Title'
-import {setXvalue} from './redux/transform/transformAction'
+import {setXvalue} from './redux/transform/currentXvalue'
+import { setModal } from  './redux/modal/modalAction';
 
 function App() {
 
 const [images, setImages] = useState([])
 const [isLoaded, setLoading] = useState(false)
-const [displayModal, setDisplayModal] = useState(true)
-
 
 const category = useSelector(state => state.category.category)
 const current = useSelector(state => state.current.current)
+const modal = useSelector(state => state.modal.displayModal)
 
 const dispatch = useDispatch()
 
 
 useEffect(() => {
-dispatch(setXvalue())
-setDisplayModal(!displayModal)
+dispatch(setXvalue(current))
+dispatch(setModal())
 }, [current])
 
 
@@ -41,7 +41,7 @@ fetchData()
 return (
  
     <div className ='App'>
-      <div className = {displayModal ? ' display overlay' : 'overlay'}></div>
+      <div className = {modal ? ' display overlay' : 'overlay'}></div>
       <Title />
       <Input  dispatch = {dispatch}/>
       {isLoaded 
@@ -55,7 +55,7 @@ return (
         style = {{width:'100%', height:'100%'}}
         >
       <ImageContainer images = {images} />
-      <Slider displayModal = {displayModal} images = {images} setDisplayModal = {setDisplayModal}/>
+      <Slider images = {images}/>
         </div>
         }
     </div>

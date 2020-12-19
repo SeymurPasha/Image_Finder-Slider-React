@@ -8,7 +8,7 @@ const modalReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_MODAL: return {
       ...state,
-      displayModal: state.displayModal
+      displayModal: !state.displayModal
     }
 
     default: return state
